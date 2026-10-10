@@ -1,0 +1,17 @@
+[project]
+name = "hopscotch-s3-lcel-chatbot"
+version = "0.1.0"
+requires-python = ">=3.13"
+dependencies = [
+    "grandalf>=0.8",
+    "langchain>=1.4.3",
+    "langchain-core>=1.6.7",
+    "langchain-openai>=1.6.7",
+    "python-dotenv>=1.2.4",
+    "streamlit>=1.65.0",
+]
+
+[dependency-groups]
+dev = [
+    "pytest>=9.1.1",
+]
