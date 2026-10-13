@@ -1,0 +1,152 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="-40 -14 1080 750" width="1080" height="750" role="img" aria-label="A customer message from the Streamlit chat goes into build_bot, which loads chat history from the session store. RunnablePassthrough.assign runs four signals concurrently: order_id, order_value, safety and an LLM triage call to OpenRouter. decide_route sends safety issues, orders over 5,000 rupees and unclear cases to human review; otherwise RunnableBranch picks the defect, policy or general prompt, each with the policy file injected. The chosen prompt makes a second OpenRouter call and the reply streams back to the chat and is saved to history.">
+        <style>
+    .bg { fill: #f5f6f9; }
+    .box { fill: #ffffff; stroke: #8f96aa; stroke-width: 1.2; }
+    .box.llm { stroke: #3a4cc9; fill: #eceefc; stroke-width: 1.5; }
+    .box.human { stroke: #c0362c; fill: #fbeceb; stroke-width: 1.5; }
+    .frame { fill: none; stroke: #8f96aa; stroke-dasharray: 5 4; stroke-width: 1; }
+    .wire { fill: none; stroke: #8f96aa; stroke-width: 1.3; }
+    .wire.llm { stroke: #3a4cc9; }
+    .t { fill: #1c1f2b; font-family: "IBM Plex Sans", -apple-system, "Segoe UI", Helvetica, Arial, sans-serif; font-size: 13px; font-weight: 600; text-anchor: middle; }
+    .t.file { font-family: "IBM Plex Mono", ui-monospace, "SF Mono", Menlo, Consolas, monospace; font-weight: 500; font-size: 12px; }
+    .s { fill: #5c6274; font-family: "IBM Plex Mono", ui-monospace, "SF Mono", Menlo, Consolas, monospace; font-size: 11px; text-anchor: middle; }
+    .rule { fill: #c0362c; font-family: "IBM Plex Mono", ui-monospace, "SF Mono", Menlo, Consolas, monospace; font-size: 11.5px; text-anchor: middle; }
+    .lbl { fill: #5c6274; font-family: "IBM Plex Mono", ui-monospace, "SF Mono", Menlo, Consolas, monospace; font-size: 11px; }
+    .lbl.llm { fill: #3a4cc9; }
+    .tag { fill: #5c6274; font-family: "IBM Plex Mono", ui-monospace, "SF Mono", Menlo, Consolas, monospace; font-size: 11px; letter-spacing: .04em; }
+    .head { fill: #8f96aa; }
+    .head.llm { fill: #3a4cc9; }
+    @media (prefers-color-scheme: dark) {
+    .bg { fill: #13151c; }
+    .box { fill: #1b1e28; stroke: #69708a;  }
+    .box.llm { stroke: #8d9bff; fill: #23284a;  }
+    .box.human { stroke: #ff7b70; fill: #3a1f20;  }
+    .frame { fill: none; stroke: #69708a;   }
+    .wire { fill: none; stroke: #69708a;  }
+    .wire.llm { stroke: #8d9bff; }
+    .t { fill: #e5e7ee;     }
+    .t.file {    }
+    .s { fill: #a0a6b8;    }
+    .rule { fill: #ff7b70;    }
+    .lbl { fill: #a0a6b8;   }
+    .lbl.llm { fill: #8d9bff; }
+    .tag { fill: #a0a6b8;    }
+    .head { fill: #69708a; }
+    .head.llm { fill: #8d9bff; }
+    }
+  </style>
+        <rect class="bg" x="-40" y="-14" width="1080" height="750"/>
+        <defs>
+          <marker id="arr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path class="head" d="M0,0 L10,5 L0,10 z"/></marker>
+          <marker id="arr-llm" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path class="head llm" d="M0,0 L10,5 L0,10 z"/></marker>
+        </defs>
+
+        <!-- Chat UI -->
+        <rect class="box" x="240" y="20" width="300" height="52" rx="7"/>
+        <text class="t" x="390" y="42">Chat UI</text>
+        <text class="s" x="390" y="60">app.py · Streamlit</text>
+
+        <!-- build_bot frame -->
+        <rect class="frame" x="30" y="95" width="720" height="615" rx="10"/>
+        <text class="tag" x="44" y="115">build_bot() · RunnableWithMessageHistory</text>
+
+        <path class="wire" d="M390 72 V138" marker-end="url(#arr)"/>
+        <text class="lbl" x="400" y="129">{input} + session_id</text>
+
+        <!-- assign -->
+        <rect class="box" x="240" y="140" width="300" height="46" rx="7"/>
+        <text class="t" x="390" y="160">RunnablePassthrough.assign</text>
+        <text class="s" x="390" y="177">adds signals = text | RunnableParallel</text>
+
+        <!-- RunnableParallel -->
+        <rect class="frame" x="50" y="205" width="680" height="125" rx="8"/>
+        <text class="tag" x="64" y="224">RunnableParallel · concurrent</text>
+        <path class="wire" d="M390 186 V245 M135 245 H645"/>
+        <path class="wire" d="M135 245 V260" marker-end="url(#arr)"/>
+        <path class="wire" d="M305 245 V260" marker-end="url(#arr)"/>
+        <path class="wire" d="M475 245 V260" marker-end="url(#arr)"/>
+        <path class="wire" d="M645 245 V260" marker-end="url(#arr)"/>
+
+        <rect class="box" x="60" y="262" width="150" height="56" rx="6"/>
+        <text class="t" x="135" y="285">order_id</text>
+        <text class="s" x="135" y="303">regex #HS…</text>
+        <rect class="box" x="230" y="262" width="150" height="56" rx="6"/>
+        <text class="t" x="305" y="285">order_value</text>
+        <text class="s" x="305" y="303">regex ₹ / Rs / INR</text>
+        <rect class="box" x="400" y="262" width="150" height="56" rx="6"/>
+        <text class="t" x="475" y="285">safety</text>
+        <text class="s" x="475" y="303">keyword regex</text>
+        <rect class="box llm" x="570" y="262" width="150" height="56" rx="6"/>
+        <text class="t" x="645" y="285">triage</text>
+        <text class="s" x="645" y="303">category,priority</text>
+
+        <path class="wire" d="M135 318 V352 M305 318 V352 M475 318 V352 M645 318 V352 M135 352 H645"/>
+        <path class="wire" d="M390 352 V378" marker-end="url(#arr)"/>
+
+        <!-- decide_route -->
+        <rect class="box human" x="170" y="380" width="440" height="92" rx="7"/>
+        <text class="t" x="390" y="401">decide_route · policy Section 4 in code</text>
+        <text class="rule" x="390" y="422">safety flag → human_review</text>
+        <text class="rule" x="390" y="440">order value &gt; ₹5,000 → human_review</text>
+        <text class="rule" x="390" y="458">triage = unclear → human_review</text>
+
+        <!-- RunnableBranch -->
+        <rect class="frame" x="50" y="490" width="680" height="120" rx="8"/>
+        <text class="tag" x="64" y="509">RunnableBranch · first match wins</text>
+        <path class="wire" d="M390 472 V522 M135 522 H645"/>
+        <path class="wire" d="M135 522 V535" marker-end="url(#arr)"/>
+        <path class="wire" d="M305 522 V535" marker-end="url(#arr)"/>
+        <path class="wire" d="M475 522 V535" marker-end="url(#arr)"/>
+        <path class="wire" d="M645 522 V535" marker-end="url(#arr)"/>
+
+        <rect class="box human" x="60" y="537" width="150" height="56" rx="6"/>
+        <text class="t" x="135" y="560">needs_human</text>
+        <text class="s" x="135" y="578">ESCALATION_PROMPT</text>
+        <rect class="box" x="230" y="537" width="150" height="56" rx="6"/>
+        <text class="t" x="305" y="560">genuine_defect</text>
+        <text class="s" x="305" y="578">DEFECT_PROMPT</text>
+        <rect class="box" x="400" y="537" width="150" height="56" rx="6"/>
+        <text class="t" x="475" y="560">policy_violation</text>
+        <text class="s" x="475" y="578">POLICY_REPLY_PROMPT</text>
+        <rect class="box" x="570" y="537" width="150" height="56" rx="6"/>
+        <text class="t" x="645" y="560">default</text>
+        <text class="s" x="645" y="578">GENERAL_PROMPT</text>
+
+        <path class="wire" d="M135 593 V630 M305 593 V630 M475 593 V630 M645 593 V630 M135 630 H645"/>
+        <path class="wire" d="M390 630 V648" marker-end="url(#arr)"/>
+
+        <!-- parser -->
+        <rect class="box" x="240" y="650" width="300" height="44" rx="7"/>
+        <text class="t" x="390" y="669">llm | StrOutputParser</text>
+        <text class="s" x="390" y="685">only the chosen branch runs</text>
+
+        <!-- reply returns to the UI -->
+        <path class="wire" d="M240 672 H6 V46 H238" marker-end="url(#arr)"/>
+        <text class="lbl" x="-6" y="380" text-anchor="middle" transform="rotate(-90 -6 380)">reply streams back · turn saved to history</text>
+
+        <!-- Right column: session store -->
+        <rect class="box" x="790" y="112" width="230" height="56" rx="7"/>
+        <text class="t" x="905" y="135">Session store</text>
+        <text class="s" x="905" y="153">chains.store · per session_id</text>
+        <path class="wire" d="M752 140 H788" marker-start="url(#arr)" marker-end="url(#arr)"/>
+        <text class="lbl" x="905" y="186" text-anchor="middle">history in, new turn out</text>
+
+        <!-- OpenRouter -->
+        <rect class="box llm" x="790" y="380" width="230" height="92" rx="7"/>
+        <text class="t" x="905" y="403">OpenRouter API</text>
+        <text class="s" x="905" y="422">openai/gpt-4o-mini</text>
+        <text class="s" x="905" y="440">llm.get_llm()</text>
+        <text class="s" x="905" y="458">ChatOpenAI client</text>
+
+        <path class="wire llm" d="M720 290 H860 V378" marker-end="url(#arr-llm)"/>
+        <text class="lbl llm" x="868" y="338">call 1 · triage</text>
+        <path class="wire llm" d="M540 672 H990 V474" marker-end="url(#arr-llm)"/>
+        <text class="lbl llm" x="982" y="662" text-anchor="end">call 2 · reply</text>
+
+        <!-- Policy file -->
+        <rect class="box" x="790" y="537" width="160" height="56" rx="7"/>
+        <text class="t file" x="870" y="560">hopscotch_policy.md</text>
+        <text class="s" x="870" y="578">Sections 1–4</text>
+        <path class="wire" d="M788 565 H732" marker-end="url(#arr)"/>
+        <text class="lbl" x="870" y="612" text-anchor="middle">.partial() into all 4</text>
+      </svg>
