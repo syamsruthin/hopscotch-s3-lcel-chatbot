@@ -14,4 +14,16 @@ dependencies = [
 [dependency-groups]
 dev = [
     "pytest>=9.1.1",
+    "pytest-cov>=7.1.0",
 ]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+pythonpath = ["."]
+addopts = "--cov --cov-report=term-missing"
+# chains.py uses InMemoryChatMessageHistory / RunnableWithMessageHistory on purpose (teaching code)
+filterwarnings = ["ignore::langchain_core._api.deprecation.LangChainDeprecationWarning"]
+
+[tool.coverage.run]
+source = ["."]
+omit = ["tests/*", ".venv/*"]

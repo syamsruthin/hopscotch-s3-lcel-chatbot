@@ -51,3 +51,7 @@ ENV*/
 .Trashes
 ehthumbs.db
 Thumbs.db
+
+# Test coverage data
+.coverage
+htmlcov/
